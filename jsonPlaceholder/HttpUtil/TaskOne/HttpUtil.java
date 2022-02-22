@@ -16,25 +16,19 @@ import java.net.http.HttpResponse;
 import java.util.List;
 
 public class HttpUtil {
-    String url = "https://jsonplaceholder.typicode.com/users";
-    private static final Gson GSON = new Gson();
-    private static final HttpClient CLIENT = HttpClient
+    public static final String URL = "https://jsonplaceholder.typicode.com/users";
+    public static final Gson GSON = new Gson();
+    public static final HttpClient CLIENT = HttpClient
             .newBuilder()
             .version(HttpClient.Version.HTTP_1_1)
             .build();
 
-    public static Gson getGSON() {
-        return GSON;
-    }
 
-    public static HttpClient getCLIENT() {
-        return CLIENT;
-    }
 
     public User sendGetById(int id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest
                 .newBuilder()
-                .uri(URI.create(url+ "/" + id ))
+                .uri(URI.create(URL+ "/" + id ))
                 .GET()
                 .build();
 
@@ -47,7 +41,7 @@ public class HttpUtil {
     public User sendGetByUsername(String username) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest
                 .newBuilder()
-                .uri(URI.create(url+ "?username=" + username))
+                .uri(URI.create(URL+ "?username=" + username))
                 .GET()
                 .build();
 
@@ -67,7 +61,7 @@ public class HttpUtil {
         final String requestBody = GSON.toJson(user);
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
+                .uri(URI.create(URL))
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .header("Content-type", "application/json")
                 .build();
@@ -81,7 +75,7 @@ public class HttpUtil {
         final String requestBody = GSON.toJson(userAfter);
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url+ "/"+ id))
+                .uri(URI.create(URL+ "/"+ id))
                 .PUT(HttpRequest.BodyPublishers.ofString(requestBody))
                 .header("Content-type", "application/json")
                 .build();
@@ -94,7 +88,7 @@ public class HttpUtil {
     public void sendDelete(int id) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url +"/"+ id))
+                .uri(URI.create(URL +"/"+ id))
                 .DELETE()
                 .build();
         HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
@@ -103,7 +97,7 @@ public class HttpUtil {
     }
     public List <User> getAllUsers() throws IOException {
         String json = Jsoup
-                .connect(url)
+                .connect(URL)
                 .ignoreContentType(true)
                 .get().body()
                 .text();
