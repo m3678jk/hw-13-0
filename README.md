@@ -4,7 +4,7 @@
 Write a program that will interact with the https://jsonplaceholder.typicode.com API. 
 You can use the standard Java features (HttpURLConnection), or get familiar with third-party libraries (Apache Fluent API, Apache HTTPClient).
 
-Exercise 1
+Task 1
 The program must contain methods for implementing the following functionality:
 creating a new object at https://jsonplaceholder.typicode.com/users. 
 You may not see updates on the site. 
